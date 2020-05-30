@@ -1,7 +1,7 @@
 from google.cloud import speech_v1
-from google.cloud.speech_v1 import v1_enums
+from google.cloud.speech_v1 import enums as v1_enums
 from google.cloud import speech_v1p1beta1
-from google.cloud.speech_v1p1beta1 import v1p1beta1_enums
+from google.cloud.speech_v1p1beta1 import enums as v1p1beta1_enums
 
 def long_audio_transcript(storage_uri, language_code = "en-US", sample_rate_hertz = 44100):
     client = speech_v1.SpeechClient()
