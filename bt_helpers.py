@@ -1,9 +1,12 @@
+from google.cloud import speech_v1
+from google.cloud.speech_v1 import v1_enums
+from google.cloud import speech_v1p1beta1
+from google.cloud.speech_v1p1beta1 import v1p1beta1_enums
+
 def long_audio_transcript(storage_uri, language_code = "en-US", sample_rate_hertz = 44100):
-    from google.cloud import speech_v1
-    from google.cloud.speech_v1 import enums
     client = speech_v1.SpeechClient()
 
-    encoding = enums.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED
+    encoding = v1_enums.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED
     config = {
         "sample_rate_hertz": sample_rate_hertz,
         "language_code": language_code,
@@ -26,12 +29,9 @@ def long_audio_transcript(storage_uri, language_code = "en-US", sample_rate_hert
 
 
 def short_audio_transcript(storage_uri, language_code = 'en-US', sample_rate_hertz = 44100):
-    from google.cloud import speech_v1p1beta1
-    from google.cloud.speech_v1p1beta1 import enums
-
     client = speech_v1p1beta1.SpeechClient()
 
-    encoding = enums.RecognitionConfig.AudioEncoding.MP3
+    encoding = v1p1beta1_enums.RecognitionConfig.AudioEncoding.MP3
     config = {
         "language_code": language_code,
         "sample_rate_hertz": sample_rate_hertz,
@@ -47,16 +47,3 @@ def short_audio_transcript(storage_uri, language_code = 'en-US', sample_rate_her
         result += alternative.transcript
 
     return result
-    
-
-
-def implicit():
-    from google.cloud import storage
-
-    # If you don't specify credentials when constructing the client, the
-    # client library will look for credentials in the environment.
-    storage_client = storage.Client()
-
-    # Make an authenticated API request
-    buckets = list(storage_client.list_buckets())
-    print(buckets)
